@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.sli.happybirthdayapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sli.happybirthdayapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
