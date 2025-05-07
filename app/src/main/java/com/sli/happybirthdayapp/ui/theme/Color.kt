@@ -2,10 +2,12 @@ package com.sli.happybirthdayapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val White = Color.White
+val Gray = Color.Gray
+val Black = Color.Black
+val ButtonColor = Color(0xEF7B7B)
+val ButtonTextColor = White
+val HeaderTextColor = Color(0x394562)
+val BackgroundVariationOne = Color(0xC5E8DF)
+val BackgroundVariationTwo = Color(0xFEEFCB)
+val BackgroundVariationThree = Color(0xDAF1F6)
