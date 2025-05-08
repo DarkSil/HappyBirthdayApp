@@ -46,7 +46,7 @@ fun ImageSelector(viewModel: IntroViewModel) {
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         uri?.let {
-            viewModel.saveUriToCache(context, it)
+            viewModel.saveUri(context, it)
         }
     }
 
@@ -59,9 +59,9 @@ fun ImageSelector(viewModel: IntroViewModel) {
             }
     ){
 
-        LaunchedEffect(imageBitmap) {
+        LaunchedEffect(Unit) {
             if (imageBitmap == null) {
-                viewModel.tryToGetBitmapFromCache()
+                viewModel.loadFromCache(context)
             }
         }
 

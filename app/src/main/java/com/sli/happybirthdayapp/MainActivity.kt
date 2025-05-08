@@ -34,6 +34,11 @@ class MainActivity : ComponentActivity() {
                     else -> false
                 }
 
+                // Toolbar is always outside the common paddings so it makes such annoying jumping
+                // while navigating between screens where toolbar should be hidden. Personally
+                // I'd use a @Composable located on required screens but from architectural pov
+                // it may looks bad so I just keep the toolbar
+
                 Scaffold(
                     topBar = {
                         StyledToolbar(showToolbar)
