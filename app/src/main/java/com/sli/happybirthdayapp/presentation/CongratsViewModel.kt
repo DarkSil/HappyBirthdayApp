@@ -55,7 +55,9 @@ class CongratsViewModel : ViewModel(), ImageCachingHandler, DataStoreHandler {
         val pair = value.getYearsAndMonthsFromMillis()
         val (years, months) = pair
 
-        return if (years > 0) {
+        return if (years == 1 && months == 0) {
+            TimeFrame.Month(12)
+        }else if (years > 0){
             TimeFrame.Year(years)
         } else {
             TimeFrame.Month(months)
