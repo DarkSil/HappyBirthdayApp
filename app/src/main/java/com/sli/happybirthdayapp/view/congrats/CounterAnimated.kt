@@ -3,6 +3,7 @@ package com.sli.happybirthdayapp.view.congrats
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -37,15 +38,15 @@ fun CounterAnimated(value: Int) {
 
         val numbersList = ImageNumber.getImageNumbers(value)
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(22.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(numbersList.size) {
                 Image(
                     painter = painterResource(numbersList[it].image),
                     contentDescription = "",
-                    contentScale = ContentScale.Fit,
+                    contentScale = ContentScale.FillHeight,
                     modifier = Modifier
-                        .size(50.dp, 88.dp)
+                        .defaultMinSize(minHeight = 88.dp)
                         .clearAndSetSemantics {  }
                 )
             }
@@ -65,5 +66,5 @@ fun CounterAnimated(value: Int) {
 @Preview
 @Composable
 private fun Preview() {
-    CounterAnimated(25)
+    CounterAnimated(11)
 }
