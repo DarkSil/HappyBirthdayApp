@@ -11,4 +11,11 @@
     <string name="name">Name</string>
     <string name="select_image">Select image</string>
     <string name="your_image">Your image</string>
+    <string name="nanit_branding_image">Nanit branding image</string>
+    <string name="baby">Baby</string>
+    <string name="today_is">Today %1$s is</string>
+    <string name="month_old">Month old!</string>
+    <string name="years_old">Years old!</string>
+    <string name="swirls_image">Swirls image</string>
+    <string name="image_background">Image Background</string>
 </resources>

@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sli.happybirthdayapp.R
-import com.sli.happybirthdayapp.presentation.SharedViewModel
+import com.sli.happybirthdayapp.presentation.IntroViewModel
 import com.sli.happybirthdayapp.view.ContinueShareButton
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -41,9 +41,9 @@ object IntroScreen {
     const val route = "intro"
 }
 
-@OptIn(FlowPreview::class)
+@OptIn(FlowPreview::class, ExperimentalMaterial3Api::class)
 @Composable
-fun IntroScreen(viewModel: SharedViewModel, onClick: () -> Unit) {
+fun IntroScreen(viewModel: IntroViewModel, onClick: () -> Unit) {
 
     var initialDateMillis: Long? by rememberSaveable { mutableStateOf(null) }
     val datePickerState = remember(initialDateMillis) {
@@ -114,7 +114,10 @@ fun IntroScreen(viewModel: SharedViewModel, onClick: () -> Unit) {
         StyledTextField(stringResource(R.string.name), name) { name = it }
         DatePickerTextField(showDialog, datePickerState)
         ImageSelector(viewModel)
-        ContinueShareButton(stringResource(R.string.show_birthday_screen), isButtonEnabled) {
+        ContinueShareButton(
+            text = stringResource(R.string.show_birthday_screen),
+            enabled = isButtonEnabled
+        ) {
             onClick()
         }
     }

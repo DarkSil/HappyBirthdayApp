@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,7 +38,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sli.happybirthdayapp.R
-import com.sli.happybirthdayapp.presentation.SharedViewModel
+import com.sli.happybirthdayapp.presentation.CongratsViewModel
 import com.sli.happybirthdayapp.utils.RandomBackground
 import com.sli.happybirthdayapp.utils.px
 import kotlin.math.cos
@@ -47,14 +46,16 @@ import kotlin.math.sin
 
 @Composable
 fun ImagePlaceholder(
+    modifier: Modifier = Modifier,
     background: RandomBackground,
-    viewModel: SharedViewModel
+    viewModel: CongratsViewModel
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(50.dp, 0.dp)
+            .padding(50.dp, 20.dp, 50.dp, 15.dp)
+            .then(modifier)
     ) {
         val context = LocalContext.current
         val launcher = rememberLauncherForActivityResult(
@@ -141,10 +142,9 @@ fun ImagePlaceholder(
 @Preview
 @Composable
 private fun Preview() {
-    Scaffold {
-        ImagePlaceholder(
-            RandomBackground.getRandomBackground(),
-            viewModel()
-        )
-    }
+    ImagePlaceholder(
+        Modifier,
+        RandomBackground.getRandomBackground(),
+        viewModel()
+    )
 }

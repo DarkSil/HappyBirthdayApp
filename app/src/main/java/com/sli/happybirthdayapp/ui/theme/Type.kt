@@ -15,7 +15,7 @@ val bentonsansFont = FontFamily(
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = bentonsansFont,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 21.sp
     ),
     labelSmall = TextStyle(

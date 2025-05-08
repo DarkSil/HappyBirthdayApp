@@ -26,6 +26,7 @@ import com.sli.happybirthdayapp.ui.theme.White
 
 @Composable
 fun ContinueShareButton(
+    modifier: Modifier = Modifier,
     text: String,
     enabled: Boolean = true,
     showShareIcon: Boolean = false,
@@ -48,6 +49,7 @@ fun ContinueShareButton(
         },
         modifier = Modifier
             .defaultMinSize(minHeight = 42.dp)
+            .then(modifier)
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -73,5 +75,8 @@ fun ContinueShareButton(
 @Preview
 @Composable
 private fun Preview() {
-    ContinueShareButton(stringResource(R.string.share_the_news), showShareIcon = true) { }
+    ContinueShareButton(
+        text = stringResource(R.string.share_the_news),
+        showShareIcon = true
+    ) { }
 }

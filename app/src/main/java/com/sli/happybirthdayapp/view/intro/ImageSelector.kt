@@ -28,14 +28,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sli.happybirthdayapp.R
-import com.sli.happybirthdayapp.presentation.SharedViewModel
+import com.sli.happybirthdayapp.presentation.IntroViewModel
 import com.sli.happybirthdayapp.ui.theme.Black
 import com.sli.happybirthdayapp.ui.theme.NeutralForegroundColor
 import com.sli.happybirthdayapp.ui.theme.White70
 import com.sli.happybirthdayapp.view.CircularCard
 
 @Composable
-fun ImageSelector(viewModel: SharedViewModel) {
+fun ImageSelector(viewModel: IntroViewModel) {
     val context = LocalContext.current
 
     val imageBitmap by viewModel.savedBitmapState.collectAsState()

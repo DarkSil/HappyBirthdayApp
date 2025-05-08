@@ -8,6 +8,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -36,4 +37,19 @@ fun Long.toDateStringApi26() : String {
         .atZone(ZoneId.systemDefault())
         .toLocalDate()
     return formatter.format(date)
+}
+
+fun Long.getYearsAndMonthsFromMillis(): Pair<Int, Int> {
+    val past = Calendar.getInstance().apply { timeInMillis = this@getYearsAndMonthsFromMillis }
+    val now = Calendar.getInstance()
+
+    var years = now.get(Calendar.YEAR) - past.get(Calendar.YEAR)
+    var months = now.get(Calendar.MONTH) - past.get(Calendar.MONTH)
+
+    if (months < 0) {
+        years -= 1
+        months += 12
+    }
+
+    return Pair(years, months)
 }
