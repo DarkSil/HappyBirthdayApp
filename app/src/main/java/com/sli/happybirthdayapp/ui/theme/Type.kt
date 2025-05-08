@@ -18,6 +18,11 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 21.sp
     ),
+    bodyMedium = TextStyle(
+        fontFamily = bentonsansFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 21.sp
+    ),
     labelSmall = TextStyle(
         fontFamily = bentonsansFont,
         fontWeight = FontWeight.Normal,
