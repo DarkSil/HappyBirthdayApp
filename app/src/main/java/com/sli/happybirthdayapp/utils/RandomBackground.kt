@@ -5,24 +5,25 @@ import com.sli.happybirthdayapp.R
 import com.sli.happybirthdayapp.ui.theme.BackgroundVariationOne
 import com.sli.happybirthdayapp.ui.theme.BackgroundVariationThree
 import com.sli.happybirthdayapp.ui.theme.BackgroundVariationTwo
-import kotlin.math.roundToInt
+import java.io.Serializable
 
 sealed class RandomBackground(
     val id: Int,
     val color: Color,
     val image: Int
-) {
-    data object Elephant : RandomBackground(
+) : Serializable {
+
+    class Elephant : RandomBackground(
         0,
         BackgroundVariationOne,
         R.drawable.bg_elephant
     )
-    data object Fox : RandomBackground(
+    class Fox : RandomBackground(
         1,
         BackgroundVariationTwo,
         R.drawable.bg_fox
     )
-    data object Pelican : RandomBackground(
+    class Pelican : RandomBackground(
         2,
         BackgroundVariationThree,
         R.drawable.bg_pelican
@@ -30,11 +31,11 @@ sealed class RandomBackground(
 
     companion object {
         fun getRandomBackground() : RandomBackground {
-            val random = (Math.random() * 100).div(33).roundToInt()
+            val random = (Math.random() * 100).div(33).toInt()
             return when (random) {
-                0 -> Elephant
-                1 -> Fox
-                else -> Pelican
+                0 -> Elephant()
+                1 -> Fox()
+                else -> Pelican()
             }
         }
     }

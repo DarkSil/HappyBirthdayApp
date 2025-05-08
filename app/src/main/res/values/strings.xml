@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Happy Birthday App</string>
+    <string name="image_placeholder">Image Placeholder</string>
+    <string name="press_to_select">Press to select</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+    <string name="share_the_news">Share the news</string>
+    <string name="share">Share</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="show_birthday_screen">Show birthday screen</string>
+    <string name="name">Name</string>
 </resources>

@@ -10,10 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sli.happybirthdayapp.ui.theme.HappyBirthdayAppTheme
+import com.sli.happybirthdayapp.view.StyledToolbar
+import com.sli.happybirthdayapp.view.intro.IntroScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +26,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HappyBirthdayAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Base(innerPadding)
+                val controller = rememberNavController()
+                val backStackEntry by controller.currentBackStackEntryAsState()
+                val currentDestination = backStackEntry?.destination?.route
+                val showToolbar = when (currentDestination) {
+                    IntroScreen.route -> true
+                    else -> false
+                }
+
+                Scaffold(
+                    topBar = {
+                        StyledToolbar(showToolbar)
+                    },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Base(innerPadding, controller)
                 }
             }
         }
@@ -30,23 +48,23 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Base(padding: PaddingValues) {
+private fun Base(padding: PaddingValues, controller: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(padding)
     ) {
-        val controller = rememberNavController()
         AppNavigation(controller)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun Preview() {
     HappyBirthdayAppTheme {
+        val controller = rememberNavController()
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Base(innerPadding)
+            Base(innerPadding, controller)
         }
     }
 }
