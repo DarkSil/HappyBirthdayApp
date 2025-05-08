@@ -40,7 +40,7 @@ import com.sli.happybirthdayapp.ui.theme.White70
 fun ImageSelector(viewModel: IntroViewModel) {
     val context = LocalContext.current
 
-    val imageBitmap by viewModel.savedBitmap.collectAsState()
+    val imageBitmap by viewModel.savedBitmapState.collectAsState()
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()

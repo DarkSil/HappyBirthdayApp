@@ -7,14 +7,20 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sli.happybirthdayapp.model.DataStoreModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.InputStream
 
 class IntroViewModel : ViewModel() {
 
-    val savedBitmap = MutableStateFlow<ImageBitmap?>(null)
+    private val dataStoreModel = DataStoreModel()
+
+    private val savedBitmap = MutableStateFlow<ImageBitmap?>(null)
+    val savedBitmapState = savedBitmap as StateFlow<ImageBitmap?>
 
     // I thought to make the process of saving parallel to the process that updates the Compose
     // but I decided to block the process for a small time to make user *wait* for an update
@@ -42,6 +48,26 @@ class IntroViewModel : ViewModel() {
     fun tryToGetBitmapFromCache() {
         if (savedBitmap.value == null) {
             // TODO Check if file exists, if so - decode to Bitmap
+        }
+    }
+
+    fun loadSavedName(context: Context) : Flow<String?> {
+        return dataStoreModel.getDetails(DataStoreModel.NAME_KEY, context)
+    }
+
+    fun loadSavedDoB(context: Context): Flow<Long?> {
+        return dataStoreModel.getDetails(DataStoreModel.DOB_KEY, context)
+    }
+
+    fun saveName(context: Context, name: String) {
+        viewModelScope.launch {
+            dataStoreModel.saveDetails(DataStoreModel.NAME_KEY, name, context)
+        }
+    }
+
+    fun saveDateOfBirth(context: Context, dateOfBirth: Long) {
+        viewModelScope.launch {
+            dataStoreModel.saveDetails(DataStoreModel.DOB_KEY, dateOfBirth, context)
         }
     }
 }

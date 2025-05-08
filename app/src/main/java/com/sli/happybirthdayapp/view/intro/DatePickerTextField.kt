@@ -2,8 +2,6 @@
 
 package com.sli.happybirthdayapp.view.intro
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -19,12 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.sli.happybirthdayapp.R
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import com.sli.happybirthdayapp.utils.toDateString
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
 
 @Composable
 fun DatePickerTextField(
@@ -68,26 +62,4 @@ object DatePickerTextField {
             }
         }
     }
-}
-
-fun Long.toDateString(): String {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        this.toDateStringApi26()
-    } else {
-        this.toDateStringLegacy()
-    }
-}
-
-fun Long.toDateStringLegacy(): String {
-    val sdf = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-    return sdf.format(Date(this))
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun Long.toDateStringApi26() : String {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val date = Instant.ofEpochMilli(this)
-        .atZone(ZoneId.systemDefault())
-        .toLocalDate()
-    return formatter.format(date)
 }
