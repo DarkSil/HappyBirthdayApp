@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,7 +32,11 @@ object CongratsScreen {
 }
 
 @Composable
-fun CongratsScreen(viewModel: CongratsViewModel) {
+fun CongratsScreen(
+    viewModel: CongratsViewModel,
+    visible: Boolean,
+    onClick: () -> Unit
+) {
     val background by rememberSaveable(
         saver = Saver(
             save = { randomBackground -> randomBackground.value },
@@ -79,9 +84,9 @@ fun CongratsScreen(viewModel: CongratsViewModel) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-        ) {
-            // TODO Share
-        }
+                .alpha(if (visible) 1f else 0f),
+            onClick = onClick
+        )
         Image(
             painter = painterResource(R.drawable.branding),
             contentDescription = stringResource(R.string.nanit_branding_image),
@@ -110,5 +115,5 @@ fun CongratsScreen(viewModel: CongratsViewModel) {
 @Preview
 @Composable
 private fun Preview() {
-    CongratsScreen(viewModel())
+    CongratsScreen(viewModel(), true) {}
 }

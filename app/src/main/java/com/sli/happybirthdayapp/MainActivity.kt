@@ -65,7 +65,7 @@ private fun Base(padding: PaddingValues, controller: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
+private fun Preview() {
     HappyBirthdayAppTheme {
         val controller = rememberNavController()
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

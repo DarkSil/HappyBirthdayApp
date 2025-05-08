@@ -2,9 +2,14 @@ package com.sli.happybirthdayapp.utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import androidx.datastore.preferences.preferencesDataStore
+import java.io.File
+import java.io.FileOutputStream
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -52,4 +57,18 @@ fun Long.getYearsAndMonthsFromMillis(): Pair<Int, Int> {
     }
 
     return Pair(years, months)
+}
+
+fun Bitmap.saveBitmapToCache(context: Context): Uri {
+    val cachePath = File(context.cacheDir, "images")
+    cachePath.mkdirs()
+    val file = File(cachePath, "shared_image.png")
+    FileOutputStream(file).use { out ->
+        this.compress(Bitmap.CompressFormat.PNG, 100, out)
+    }
+    return FileProvider.getUriForFile(
+        context,
+        "${context.packageName}.fileprovider",
+        file
+    )
 }
