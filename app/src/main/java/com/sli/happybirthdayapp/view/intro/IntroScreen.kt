@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sli.happybirthdayapp.R
-import com.sli.happybirthdayapp.presentation.IntroViewModel
+import com.sli.happybirthdayapp.presentation.SharedViewModel
 import com.sli.happybirthdayapp.view.ContinueShareButton
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -43,7 +43,7 @@ object IntroScreen {
 
 @OptIn(FlowPreview::class)
 @Composable
-fun IntroScreen(viewModel: IntroViewModel, onClick: () -> Unit) {
+fun IntroScreen(viewModel: SharedViewModel, onClick: () -> Unit) {
 
     var initialDateMillis: Long? by rememberSaveable { mutableStateOf(null) }
     val datePickerState = remember(initialDateMillis) {

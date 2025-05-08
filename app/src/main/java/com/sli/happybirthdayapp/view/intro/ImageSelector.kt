@@ -9,9 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,13 +28,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sli.happybirthdayapp.R
-import com.sli.happybirthdayapp.presentation.IntroViewModel
+import com.sli.happybirthdayapp.presentation.SharedViewModel
 import com.sli.happybirthdayapp.ui.theme.Black
 import com.sli.happybirthdayapp.ui.theme.NeutralForegroundColor
 import com.sli.happybirthdayapp.ui.theme.White70
+import com.sli.happybirthdayapp.view.CircularCard
 
 @Composable
-fun ImageSelector(viewModel: IntroViewModel) {
+fun ImageSelector(viewModel: SharedViewModel) {
     val context = LocalContext.current
 
     val imageBitmap by viewModel.savedBitmapState.collectAsState()
@@ -66,20 +64,13 @@ fun ImageSelector(viewModel: IntroViewModel) {
         }
 
         if (imageBitmap != null) {
-            imageBitmap?.let {
-                Card(
-                    shape = CircleShape,
-                    elevation = CardDefaults.cardElevation(0.dp,0.dp,0.dp,0.dp,0.dp,0.dp),
-                    colors = CardDefaults.cardColors(
-                        Color.Transparent,
-                        Color.Transparent,
-                        Color.Transparent,
-                        Color.Transparent
-                    ),
+            imageBitmap?.let { image ->
+                CircularCard(
+                    containerColor = Color.Transparent,
                     border = BorderStroke(1.5.dp, White70)
                 ) {
                     Image(
-                        bitmap = it,
+                        bitmap = image,
                         contentDescription = stringResource(R.string.image_placeholder),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(100.dp)

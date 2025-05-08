@@ -1,6 +1,7 @@
 package com.sli.happybirthdayapp.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.datastore.preferences.preferencesDataStore
@@ -11,6 +12,9 @@ import java.util.Date
 import java.util.Locale
 
 val Context.detailsDataStore by preferencesDataStore(name = "birthdayDetails")
+
+val Float.px: Float
+    get() = this * Resources.getSystem().displayMetrics.density
 
 fun Long.toDateString(): String {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

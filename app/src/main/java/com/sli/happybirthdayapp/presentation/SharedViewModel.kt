@@ -7,12 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sli.happybirthdayapp.model.DataStoreModel
 import com.sli.happybirthdayapp.model.ImageCachingModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class IntroViewModel : ViewModel() {
+// I decided to merge the viewModels into one to not create a few classes with the same code and
+// to not play with inheritance
+
+class SharedViewModel : ViewModel() {
 
     private val dataStoreModel = DataStoreModel()
     private val imageCachingModel = ImageCachingModel()
@@ -26,7 +30,7 @@ class IntroViewModel : ViewModel() {
     // I also decided not to add Circular Progress Bar since in most cases it won't even show up
 
     fun saveUri(context: Context, uri: Uri) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             imageCachingModel.saveUriAsFile(context, uri)
             savedBitmap.value = imageCachingModel.loadImageBitmap(context)
         }
@@ -34,7 +38,7 @@ class IntroViewModel : ViewModel() {
 
     fun loadFromCache(context: Context) {
         if (savedBitmap.value == null) {
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 savedBitmap.value = imageCachingModel.loadImageBitmap(context)
             }
         }
@@ -49,13 +53,13 @@ class IntroViewModel : ViewModel() {
     }
 
     fun saveName(context: Context, name: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             dataStoreModel.saveDetails(DataStoreModel.NAME_KEY, name, context)
         }
     }
 
     fun saveDateOfBirth(context: Context, dateOfBirth: Long) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             dataStoreModel.saveDetails(DataStoreModel.DOB_KEY, dateOfBirth, context)
         }
     }
