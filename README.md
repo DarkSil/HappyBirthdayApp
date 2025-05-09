@@ -1,8 +1,17 @@
 <pre>
+<div align="center">
 Happy Birthday App
 Nanit's test task
   
+
 <img src="https://github.com/DarkSil/HappyBirthdayApp/blob/master/files/demo.jpg" width="150"/>
+
+<a href="https://github.com/DarkSil/HappyBirthdayApp/blob/master/files/app-debug.apk">
+<img src="https://github.com/DarkSil/HappyBirthdayApp/blob/master/files/download.png" width="100"/>
+<p><b>Download APK</b></p>
+</a>
+</div>
+
 
 Tech stack:
 
