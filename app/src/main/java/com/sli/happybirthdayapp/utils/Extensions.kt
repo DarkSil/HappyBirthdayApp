@@ -50,6 +50,11 @@ fun Long.getYearsAndMonthsFromMillis(): Pair<Int, Int> {
 
     var years = now.get(Calendar.YEAR) - past.get(Calendar.YEAR)
     var months = now.get(Calendar.MONTH) - past.get(Calendar.MONTH)
+    val days = now.get(Calendar.DAY_OF_MONTH) - past.get(Calendar.DAY_OF_MONTH)
+
+    if (days < 0) {
+        months -= 1
+    }
 
     if (months < 0) {
         years -= 1
